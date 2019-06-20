@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>瞬間中作文</title>
+    <title>瞬プロ</title>
     <style>
     body{
         margin: 20px;	/* bodyの外側の余白を指定する */
@@ -109,6 +109,7 @@
                 <option value="0" selected disabled>=選択してください=</option>
                 <option value="1">JavaScript</option>
                 <option value="2">PHP</option>
+                <option value="3">C#</option>
                 </select>
                 <input type="button" value="開始する" onclick="kantango();">
             </p>
@@ -129,12 +130,14 @@
                 </div>
     </div>
     <script>
-        var tango1=["コンソールで'Hello, World!'と表示","'N'と'高等学校'を繋げて表示する"]
-        var tantan1=["console.log('Hello, World!');","console.log('N' + '高等学校');"]
-        var tango2=["ページに'Hello, PHP!'と表示","'N'と'高等学校'を繋げて表示する"]
-        var tantan2=["echo 'Hello, PHP!';","echo 'N' . '高等学校';"]
-        var tango=[]
-        var tantan=[]
+        var javascript=["コンソールで'Hello, World!'と表示","'N'と'高等学校'を繋げて表示する"]
+        var javascript_ans=["console.log('Hello, World!');","console.log('N' + '高等学校');"]
+        var php=["ページに'Hello, PHP!'と表示","'N'と'高等学校'を繋げて表示する"]
+        var php_ans=["echo 'Hello, PHP!';","echo 'N' . '高等学校';"]
+        var cs=["コンソールに 'Hello, World!' と表示する。 (最後に改行 | エスケープ文字を使用しない)","コンソールに 変数var1 と ' and ' と 変数var2 を繋げて表示する。 (最後に改行 | エスケープ文字を使用しない)","コンソールの入力をstring型の変数inputに代入する。"]
+        var cs_ans=["Console.WriteLine(var1 + \' and \' + var2);","Console.Write(var1 + \' and \' + var2 + \'\\n\');","string input = Console.Read();"]
+        var require=[]
+        var answer=[]
         var now = 0
         var i=0
         var seito=0
@@ -150,10 +153,10 @@
                     seito=0
                     i=0
                     now=1
-                    tango=tango1
-                    tantan=tantan1
-                    document.getElementById("monda").innerHTML=tango[i]
-                    document.getElementById("moji").innerHTML=tantan[i].length+"文字で回答"
+                    require=javascript
+                    answer=javascript_ans
+                    document.getElementById("monda").innerHTML=require[i]
+                    document.getElementById("moji").innerHTML=answer[i].length+"文字で回答"
                     document.getElementById("mono2").style.display = "none";
                     document.getElementById("mono").style.display = "none";
                     break;
@@ -161,10 +164,21 @@
                     seito=0
                     i=0
                     now=2
-                    tango=tango2
-                    tantan=tantan2
-                    document.getElementById("monda").innerHTML=tango[i]
-                    document.getElementById("moji").innerHTML=tantan[i].length+"文字で回答"
+                    require=php
+                    answer=php_ans
+                    document.getElementById("monda").innerHTML=require[i]
+                    document.getElementById("moji").innerHTML=answer[i].length+"文字で回答"
+                    document.getElementById("mono2").style.display = "none";
+                    document.getElementById("mono").style.display = "none";
+                    break;
+                case 3:
+                    seito=0
+                    i=0
+                    now=3
+                    require=cs
+                    answer=cs_ans
+                    document.getElementById("monda").innerHTML=require[i]
+                    document.getElementById("moji").innerHTML=answer[i].length+"文字で回答"
                     document.getElementById("mono2").style.display = "none";
                     document.getElementById("mono").style.display = "none";
                     break;
@@ -177,25 +191,25 @@
                 return;
             }
             var kaito=document.getElementById("kotae").value
-            if (kaito==tantan[i]){
+            if (kaito==answer[i]){
                 document.getElementById("mono2").style.display = "inline-block";
                 document.getElementById("mono").style.display = "none";
-                document.getElementById("mono2").innerHTML="正解<br>正答:"+tantan[i]+"<br>回答:"+kaito;
+                document.getElementById("mono2").innerHTML="正解<br>正答:"+answer[i]+"<br>回答:"+kaito;
                 seito+=1
             }else{
                 document.getElementById("mono2").style.display = "none";
                 document.getElementById("mono").style.display = "inline-block";
-                document.getElementById("mono").innerHTML="不正解<br>正答:"+tantan[i]+"<br>回答:"+kaito;
+                document.getElementById("mono").innerHTML="不正解<br>正答:"+answer[i]+"<br>回答:"+kaito;
             }
             i+=1
-            if(i==tantan.length){
-                alert("終了！ 正答数：" + tantan.length + "問中"+seito+"問")
+            if(i==answer.length){
+                alert("終了！ 正答数：" + answer.length + "問中"+seito+"問")
                 now=0
                 location.reload();
                 return;
             }
-            document.getElementById("monda").innerHTML=tango[i]
-            document.getElementById("moji").innerHTML=tango[i].length+"文字で回答"
+            document.getElementById("monda").innerHTML=require[i]
+            document.getElementById("moji").innerHTML=require[i].length+"文字で回答"
             document.getElementById("kotae").value=""
         }
     </script>
