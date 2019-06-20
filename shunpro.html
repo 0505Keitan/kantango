@@ -13,15 +13,15 @@
     }
     .Header {
         position: fixed;	/* ヘッダーを固定する */
-        top: 0;	/* 上部から配置の基準位置を決める */ 
-        left: 0;	/* 左から配置の基準位置を決める */ 
+        top: 0;	/* 上部から配置の基準位置を決める */
+        left: 0;	/* 左から配置の基準位置を決める */
         width: 100%;	/* ヘッダーの横幅を指定する */
         height: 35px;	/* ヘッダーの高さを指定する */
         padding: 10px;	/* ヘッダーの余白を指定する(上下左右) */
         background-color: #333333;	/* ヘッダーの背景色を指定する */
         color: #ffffff;	/* フォントの色を指定する */
         font-size:150%;
-    }	
+    }
     .Contents {
         width: 100%;	/* コンテンツの横幅を指定する */
         overflow: auto; /* コンテンツの表示を自動に設定（スクロール） */
@@ -35,7 +35,7 @@
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
     }
     .box11 p {
-        margin: 0; 
+        margin: 0;
         padding: 10px;
     }
     .center{
@@ -90,7 +90,7 @@
         border-radius: 10px;/*角の丸み*/
     }
     .box2 p {
-        margin: 0; 
+        margin: 0;
         padding: 0;
     }
     #mono2{
@@ -100,14 +100,15 @@
     </style>
 </head>
 <body>
-    <div class="Header">瞬間中作文</div>	
-    <div class="Contents">	
+    <div class="Header">瞬プロ</div>
+    <div class="Contents">
         <div class="box11">
             <p>
-                レベル選択<br>
+                言語選択<br>
                 <select id="level">
-                <option value="0">=選択してください=</option>
-                <option value="1">レベル1</option>
+                <option value="0" disabled>=選択してください=</option>
+                <option value="1">JavaScript</option>
+                <option value="2">PHP</option>
                 </select>
                 <input type="button" value="開始する" onclick="kantango();">
             </p>
@@ -128,10 +129,10 @@
                 </div>
     </div>
     <script>
-        var tango1=["私は日本人です。","私は中国人です。","私はパンダです。","私の名前は李明です。","あなたは日本人です。","彼は日本人です。","あなたはアイスクリームを食べます","彼女は日本人ですか。","これはアイスクリームです。","彼らは中国人ですか？"]
-        var tantan1=["我是日本人。","我是中国人。","我是熊猫。","我叫李明。","你是日本人。","他是日本人。","你吃冰淇淋。","她是日本人吗？","这是冰淇淋。","他们是中国人吗？"]
-        var tango2=["펜","사과","오렌지","개","고양이","내","집","내가","안녕하세요","사람"]
-        var tantan2=["ペン","りんご","オレンジ","犬","猫","私の","家","私が","こんにちは","人"]
+        var tango1=["コンソールで'Hello, World!'と表示","'N'と'高等学校'を繋げて表示する"]
+        var tantan1=["console.log('Hello, World!');","console.log('N' + '高等学校');"]
+        var tango2=["ページに'Hello, PHP!'と表示","'N'と'高等学校'を繋げて表示する"]
+        var tantan2=["echo 'Hello, PHP!';","echo 'N' . '高等学校';"]
         var tango=[]
         var tantan=[]
         var now = 0
@@ -179,7 +180,7 @@
             if (kaito==tantan[i]){
                 document.getElementById("mono2").style.display = "inline-block";
                 document.getElementById("mono").style.display = "none";
-                document.getElementById("mono2").innerHTML="正解<br>正答:"+tantan[i]+"<br>回答:"+kaito; 
+                document.getElementById("mono2").innerHTML="正解<br>正答:"+tantan[i]+"<br>回答:"+kaito;
                 seito+=1
             }else{
                 document.getElementById("mono2").style.display = "none";
@@ -187,13 +188,14 @@
                 document.getElementById("mono").innerHTML="不正解<br>正答:"+tantan[i]+"<br>回答:"+kaito;
             }
             i+=1
-            if(i==10){
-                alert("終了！ 正答数：１０問中"+seito+"問")
+            if(i==tantan.length){
+                alert("終了！ 正答数：" + tantan.length + "問中"+seito+"問")
                 now=0
+                location.reload();
                 return;
             }
             document.getElementById("monda").innerHTML=tango[i]
-            document.getElementById("moji").innerHTML=tantan[i].length+"文字で回答"
+            document.getElementById("moji").innerHTML=tango[i].length+"文字で回答"
             document.getElementById("kotae").value=""
         }
     </script>
